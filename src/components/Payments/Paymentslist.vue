@@ -7,7 +7,7 @@
       <p>Value</p>
     </div>
     <div class="items">
-      <div v-for="item in list" class="item" :key="item.id">
+      <div v-for="item in getActiveList" class="item" :key="item.id">
         <p>{{ item.id }}</p>
         <p>{{ item.date }}</p>
         <p class="category">{{ item.category }}</p>
@@ -18,15 +18,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: "Paymentslist.vue",
-  props: {
-    list: {
-      type: Array,
-      default: () => []
-    }
+  computed: {
+    ...mapGetters('payments', ["getActiveList"])
   }
 }
+
+
 </script>
 
 <style scoped>
