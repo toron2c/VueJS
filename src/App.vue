@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <Calc />
+    <Navigation />
+   <div class="content">
+     <router-view></router-view>
+   </div>
   </div>
 </template>
 
 <script>
-import Calc from './components/Calc.vue'
-
+import Navigation from "./components/Payments/Navigation/Navigation";
+import {mapActions} from "vuex";
 export default {
   name: 'App',
-  components: {
-    Calc
-  }
+  components: {Navigation},
+  methods: {
+    ...mapActions('payments', ['fetchData', 'loadCategories']),
+  },
+  created() {
+    this.fetchData();
+    this.loadCategories();
+    this.$router.push({name: 'Dashboard', params: 1})
+  },
 }
 </script>
 
@@ -23,5 +32,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.content {
+  margin: 0 auto;
+  width: 800px;
+  height: 600px;
+  background: #faf9dbf7;
+  border: 25px solid #524e4e;
+  border-radius: 25px;
 }
 </style>
