@@ -38,6 +38,12 @@ export default {
         this.chosePage(newNumberPage)
       }
     }
+  },
+  mounted() {
+    const page = this.$route.params.page;
+    if(page) {
+      this.chosePage(page);
+    }
   }
 }
 </script>

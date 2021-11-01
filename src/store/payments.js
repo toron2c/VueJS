@@ -49,7 +49,8 @@ const mutations = {
     },
     setNewCategory(state, newCategory) {
         state.categoryList = [...state.categoryList, newCategory];
-    }
+    },
+
 
 }
 

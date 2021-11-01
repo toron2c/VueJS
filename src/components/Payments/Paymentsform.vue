@@ -12,7 +12,7 @@
       <button class="save" @click="saveHandler">Save</button>
       <template v-if="isFormNewCategoryEnabled">
         <input type="text" placeholder="New Category" v-model="newCategory">
-        <button class="save" @click="addNewCategory">add</button>
+        <button class="save" @click="addNewCategory(newCategory)">add</button>
       </template>
       <div>
       </div>
@@ -35,6 +35,7 @@ export default {
   },
   computed: {
     ...mapGetters('payments', ['getLastId', "getCategoryList"]),
+
     getCurrentDate() {
       const today = new Date();
       const d = today.getDate()
@@ -47,9 +48,9 @@ export default {
   methods: {
     ...mapActions('payments', []),
     ...mapMutations('payments', ['setNewPay', 'setLastId', 'setNewCategory']),
-    addNewCategory() {
+    addNewCategory(newCategory) {
       this.isFormNewCategoryEnabled = false;
-      this.setNewCategory(this.newCategory);
+      this.setNewCategory(newCategory);
       this.newCategory = '';
     },
     saveHandler() {
@@ -67,6 +68,20 @@ export default {
       this.setNewPay(data);
     }
   },
+  mounted() {
+  if(this.$route.name === 'AddPayment') {
+    let category = this.$route.params.pathMatch.slice(1);
+    let value = this.$route.query.value;
+    if(category || value) {
+      this.isFormEnabled = true;
+      this.value = value;
+      this.category = category;
+      if(this.category && this.value) {
+        setTimeout(this.saveHandler, 2000)
+      }
+    }
+  }
+  }
 }
 </script>
 
