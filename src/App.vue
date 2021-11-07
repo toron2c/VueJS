@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Navigation from "./components/Payments/Navigation/Navigation";
+import Navigation from "./Navigation/Navigation";
 import {mapActions} from "vuex";
 export default {
   name: 'App',
@@ -19,7 +19,6 @@ export default {
   created() {
     this.fetchData();
     this.loadCategories();
-    this.$router.push({name: 'Dashboard', params: 1})
   },
 }
 </script>

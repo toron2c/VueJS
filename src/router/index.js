@@ -4,14 +4,19 @@ import Payments from "../views/Payments";
 import About from "../views/About";
 import NotFound from "../views/NotFound";
 import Paymentsform from "../components/Payments/Paymentsform";
-
+import Editor from "../components/Payments/Editor"
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/dashboard/:page',
+        path: '/dashboard',
         name: 'Dashboard',
         component: Payments
+    },
+    {
+        path: '/edit',
+        name: 'edit',
+        component: Editor,
     },
     {
         path: '/about',

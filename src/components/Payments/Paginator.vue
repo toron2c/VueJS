@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .paginator {
-  margin-top: 236px;
+  margin-top: 60px;
   display: flex;
   justify-content: center;
 }

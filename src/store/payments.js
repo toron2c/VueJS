@@ -24,7 +24,7 @@ const mutations = {
         state.pages = number;
     },
     setActiveList(state, payload) {
-      state.activeList = payload;
+        state.activeList = payload;
     },
     setPage(state, page) {
         state.currentPage = page;
@@ -50,8 +50,20 @@ const mutations = {
     setNewCategory(state, newCategory) {
         state.categoryList = [...state.categoryList, newCategory];
     },
-
-
+    editPay(state, data) {
+        const {idx, category, value, date, currentPage} = data;
+        state.activeList[idx] = {...state.activeList[idx], category: category, date: date, value: value};
+        state.paymentsList[`page` + currentPage][idx] = {
+            ...state.paymentsList[`page` + currentPage][idx],
+            category: category,
+            date: date,
+            value: value
+        };
+    },
+    deletePay(state, data) {
+        // state.activeList.splice(data.idx, data.idx + 1)
+        state.paymentsList[`page` + data.getCurrentPage].splice(data.idx, data.idx+1)
+    }
 }
 
 const actions = {
@@ -65,9 +77,9 @@ const actions = {
         commit('setNumbersOfPages', pages)
     },
     updateActiveList({commit}, page) {
-      let newList = state.paymentsList[`page` + page];
-      commit('setActiveList', newList);
-      commit('setPage', page);
+        let newList = state.paymentsList[`page` + page];
+        commit('setActiveList', newList);
+        commit('setPage', page);
     },
     loadCategories({commit}) {
         return new Promise((resolve) => {
@@ -79,7 +91,9 @@ const actions = {
                 commit('setCategories', res)
             })
     },
-
+    deletePay({commit},data) {
+        commit('deletePay', data);
+    }
 }
 
 export default {

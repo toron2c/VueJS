@@ -1,14 +1,18 @@
 <template>
   <Nav class="navigation">
-    <router-link class="nav__link" :to="{name: 'Dashboard', params: 1}">Dashboard</router-link>
+    <router-link class="nav__link" :to="{name: 'Dashboard'}">Dashboard</router-link>
     <router-link class="nav__link" to="/about">About</router-link>
     <router-link class="nav__link" to="/notfound">Not Found</router-link>
   </Nav>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-  name: "Navigation"
+  name: "Navigation",
+  computed: {
+    ...mapGetters('payments', ['getCurrentPage'])
+  }
 }
 </script>
 
