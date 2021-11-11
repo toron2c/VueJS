@@ -1,11 +1,12 @@
 <template>
   <div>
-    <input v-model.number="operand1" type="number">
-    <input v-model.number="operand2" type="number">
+    <input name="operand1" v-model.number="operand1" type="number">
+    <input name="operand2" v-model.number="operand2" type="number">
     <span> = </span>
     <span> {{ result }} </span>
     <div>
       <button v-for="item in operators"
+              :name="item.value"
               :key="item.name"
               @click="calcMethod(item.value)"
               :title="item.name"
@@ -14,19 +15,19 @@
       </button>
     </div>
     <div class="keyboard">
-      <label>
-        <input type="checkbox" v-model="isKeyboard">
+      <label for="check" data-keyboard>
+        <input id="check"  name="inputKeyboard" type="checkbox" v-model="keyboard">
         Включить клавиатуру
       </label>
-      <div v-if="isKeyboard">
-        <button v-for="(item, idx) in buttons" :key="idx" @click="addCommand(item)">
+      <div v-if="keyboard">
+        <button  v-for="(item, idx) in buttons" data-keyboardbtn  :name="(item)" :key="idx" @click="addCommand(item)">
           {{ item }}
         </button>
         <div>
           <label>
             <input type="radio" v-model="selectedOperand" :value="'operand1'"> Операнд 1
           </label>
-          <label>
+          <label data-operand2>
             <input type="radio" v-model="selectedOperand" :value="'operand2'"> Операнд 2
           </label>
         </div>
@@ -69,7 +70,7 @@ export default {
           value: '//',
         }
       ],
-      isKeyboard: false,
+      keyboard: true,
       buttons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '←'],
       selectedOperand: 'operand1',
     }

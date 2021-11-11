@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navigation />
+    <Calc />
    <div class="content">
      <router-view></router-view>
    </div>
@@ -10,9 +11,10 @@
 <script>
 import Navigation from "./Navigation/Navigation";
 import {mapActions} from "vuex";
+import Calc from "./components/Calc/Calc";
 export default {
   name: 'App',
-  components: {Navigation},
+  components: {Calc, Navigation},
   methods: {
     ...mapActions('payments', ['fetchData', 'loadCategories']),
   },
